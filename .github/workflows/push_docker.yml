@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Yandex Container Registry
+      run: |
+        echo "${{ secrets.YC_OAUTH_TOKEN }}" | docker login --username oauth --password-stdin cr.yandex
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: catgpt
+        push: true
+        tags: cr.yandex/crp1gb221iad7ut49kce/catgpt:latest
+
