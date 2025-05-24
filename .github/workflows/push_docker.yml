@@ -17,10 +17,6 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     
-    - name: Test secret
-      run: |
-        echo "${{ secrets.YC_OAUTH_TOKEN }}"
-
     - name: Log in to Yandex Container Registry
       run: |
         echo "${{ secrets.YC_OAUTH_TOKEN }}" | docker login --username oauth --password-stdin cr.yandex
