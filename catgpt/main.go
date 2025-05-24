@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 )
 
@@ -10,6 +11,7 @@ var (
 )
 
 func main() {
+	fmt.Println("hi!")
 	listenPublic := ":8080"
 	if lp := os.Getenv("CATGPT_LISTEN_PUBLIC"); lp != "" {
 		listenPublic = lp
